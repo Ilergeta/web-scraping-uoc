@@ -1,12 +1,13 @@
-# foodPriceScraper
-## Español
+# Bolsa scraprer
 
-Extrae los precios de diferentes alimentos de la página web del [SISAP](http://sistemas.minag.gob.pe/sisap/portal2/mayorista/) del Ministerio de Agricultura y Riego.
+### Autors: Josep Maria Espasa Verdés, Andrés Laverde Marín
 
-Para ejecutar el script es necesario instalar la siguientes bibliotecas:
+## Llibreries
+
+Per executar el nostre codi és necesari tenir instalades les llibreries:
+
 ```
 pip install pandas
 pip install requests
-pip install lxml
 pip install beautifulsoup4
 ```
