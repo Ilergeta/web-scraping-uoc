@@ -1,4 +1,4 @@
-# Bolsa scraprer
+# Bolsa scraper
 
 ### Autors: Josep Ma Espasa Verdés, Andrés Laverde Marín
 
