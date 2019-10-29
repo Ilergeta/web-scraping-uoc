@@ -1,6 +1,6 @@
 # Bolsa scraprer
 
-### Autors: Josep Maria Espasa Verdés, Andrés Laverde Marín
+### Autors: Josep Ma Espasa Verdés, Andrés Laverde Marín
 
 ## Llibreries
 
