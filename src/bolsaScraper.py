@@ -17,14 +17,23 @@ class BolsaScraper():
         """
         url = self.path + "/esp/aspx/Empresas/Empresas.aspx"
         
+        #robots = requests.get(url+'/robots.txt')
+        
+        #print(robots.content)
+        
         page = requests.get(url)
         
         soup = BeautifulSoup(page.content, 'html.parser')
         
-        # Reads data
-        taula = soup.find(id="ctl00_Contenido_tblEmisoras")
+        links = soup.find_all('a')
         
-        print(taula)
+        linkEmp = ''
+        
+        for link in links:
+            if nomEmpresa in link.text:
+                linkEmp = link.attrs['href']
+                
+        print(linkEmp)
         
     def dadesEmpresa(self):
         """
@@ -68,7 +77,7 @@ def main():
     
     bolsa = BolsaScraper()
     
-    bolsa.dadesEmpresa()
+    #bolsa.dadesEmpresa()
     
     bolsa.trobarEmpresa("ABENGOA, S.A.")
     
