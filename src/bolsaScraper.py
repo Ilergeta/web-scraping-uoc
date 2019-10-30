@@ -1,4 +1,4 @@
-# Imports needed libraries
+# -*- coding: utf-8 -*f
 import requests
 import csv
 from bs4 import BeautifulSoup
