@@ -19,41 +19,48 @@ class BolsaScraper():
         url = self.path + "/esp/aspx/Empresas/Empresas.aspx"
         
         headers = {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept': 'text/html,application/xhtml+xml, \
+                application/xml;q=0.9,*/*;q=0.8',
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Origin': 'http://www.bolsamadrid.es',
                 'Accept-Encoding': 'gzip, deflate',
                 'Upgrade-Insecure-Requests': '1',
                 'Host': 'www.bolsamadrid.es',
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 Safari/605.1.15',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) \
+                AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 \
+                Safari/605.1.15',
                 'Accept-Language': 'es-es',
-                'Connection': 'keep-alive',
+                'Connection': 'keep-alive'
                 }
         
-        data = {
+        page = 0
+        
+        linkEmp = ''
+        
+        while not linkEmp:
+           data = {
                 '__EVENTTARGET': '',
                 '__EVENTARGUMENT': '',
                 '__VIEWSTATE': 'ELOG9j+dXlB0neVne96qoQt5YBD99TrZEhhPUlG2uUo1xqC3cym00LyqoRQoi8x0RzaWp7RCOsxDjW3KsByfdG9p8VkpQGQaFjJGdNLbKjGy3H8jqKwTRvW/hDQPsv3aDesfZAxZHi3QO89pBa1Kr9diSmSxfx7PBYisYbL74FTK3gWFDcwXe/pkaTj34dUzsoLi7g==',
                 '__VIEWSTATEGENERATOR': '65A1DED9',
                 '__EVENTVALIDATION': '74YPg3B3Klx410ErZzrI+oUgqOATLDvnA/jY9wSgYwwIVARtwCmEEfVHIgrrd/7qdwqFGaen89VfmYLafxEGEwc5TeJDIkKP9Il8ZpD002wYxJgmruY/YdpYGmiey3RQFegiFLG0vgY/dZH9ObURK+wLPzhz7nTNRuQOdaaC9TgQX8oH51Layu04bs4EvFmtZF4gzDIRcYEba88DVy8pzykMaxB5cT353XUYf47IPnNFdXHC',
-                'ctl00$Contenido$GoPag': '6'
+                'ctl00$Contenido$GoPag': str(page)
                 }
+           response = requests.post(url, headers=headers, data=data)
         
-        #robots = requests.get(url+'/robots.txt')
+           soup = BeautifulSoup(response.content, 'html.parser')
         
-        #print(robots.content)
-        
-        page = requests.post(url, headers=headers, data=data)
-        
-        soup = BeautifulSoup(page.content, 'html.parser')
-        
-        links = soup.find_all('a')
-        
-        linkEmp = ''
-        
-        for link in links:
-            if nomEmpresa in link.text:
-                linkEmp = link.attrs['href']
+           links = soup.find_all('a')
+
+           for link in links:
+               if nomEmpresa in link.text:
+                   linkEmp = link.attrs['href']
+                   
+           if page > 7:
+               print("No se encuentra la empresa")
+               break
+           page = page + 1
+           
                 
         print(linkEmp)
         
@@ -124,11 +131,12 @@ class BolsaScraper():
 
 def main():
     
+    # Aquest codi és el que anira finalment al main
     bolsa = BolsaScraper()
     
-    bolsa.dadesEmpresa()
+    #bolsa.dadesEmpresa()
     
-    bolsa.trobarEmpresa("ZARDOYA OTIS, S.A.")
+    bolsa.trobarEmpresa("VISCOFAN, S.A.")
     
 if __name__ == "__main__":
     main()
