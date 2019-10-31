@@ -37,7 +37,10 @@ class BolsaScraper():
         
         linkEmp = ''
         
+        # This loop run the all pages in a table until find the page that 
+        # contain the name of entity 
         while not linkEmp:
+            # This data is use to do a post requests and contain the table page
            data = {
                 '__EVENTTARGET': '',
                 '__EVENTARGUMENT': '',
@@ -46,25 +49,36 @@ class BolsaScraper():
                 '__EVENTVALIDATION': '74YPg3B3Klx410ErZzrI+oUgqOATLDvnA/jY9wSgYwwIVARtwCmEEfVHIgrrd/7qdwqFGaen89VfmYLafxEGEwc5TeJDIkKP9Il8ZpD002wYxJgmruY/YdpYGmiey3RQFegiFLG0vgY/dZH9ObURK+wLPzhz7nTNRuQOdaaC9TgQX8oH51Layu04bs4EvFmtZF4gzDIRcYEba88DVy8pzykMaxB5cT353XUYf47IPnNFdXHC',
                 'ctl00$Contenido$GoPag': str(page)
                 }
+           # Post request to a url using header and data defined before
            response = requests.post(url, headers=headers, data=data)
-        
+           # Create soup with the html response from page
            soup = BeautifulSoup(response.content, 'html.parser')
-        
+           # Find links in the page
            links = soup.find_all('a')
-
+           # This loop find link that contain the name of company and return the
+           # page that contain information about this
            for link in links:
                if nomEmpresa in link.text:
                    linkEmp = link.attrs['href']
-                   
+           # This if control that the while are not infinite in case that not
+           # find any match with the name (Only read the all page of the table)
            if page > 7:
                print("No se encuentra la empresa")
                break
            page = page + 1
            
+           
+           # Define dict to change part of url to goes directly to page that
+           # contain data 
+           urlchange = {
+                   "FichaValor": "InfHistorica"
+                   }
+           for word, info in urlchange.items():
+               linkEmp = linkEmp.replace(word, info)
                 
-        print(linkEmp)
+        return linkEmp
         
-    def dadesEmpresa(self):
+    def dadesEmpresa(self, lastUrl):
         """
         Retorna les dades de l'empresa seleccionada
         """
@@ -81,7 +95,7 @@ class BolsaScraper():
 
         # Loads webpage -- Serà variable vindrà donada per la funció anterior
         
-        url = self.path +'/esp/aspx/Empresas/InfHistorica.aspx?ISIN=ES0105200002'
+        url = self.path + lastUrl
 
         # Opens url and selects date form
         br.open(url)
@@ -134,9 +148,11 @@ def main():
     # Aquest codi és el que anira finalment al main
     bolsa = BolsaScraper()
     
-    #bolsa.dadesEmpresa()
+    # Find url with the name of the company
+    url = bolsa.trobarEmpresa("BANCO BRADESCO S.A.")
     
-    bolsa.trobarEmpresa("VISCOFAN, S.A.")
+    # Find and save data from a company defined before
+    bolsa.dadesEmpresa(url)
     
 if __name__ == "__main__":
     main()
