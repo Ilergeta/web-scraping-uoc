@@ -9,6 +9,7 @@ Per executar el nostre codi és necesari tenir instalades les llibreries:
 ```
 pip install pandas
 pip install requests
+pip install mechanize
 pip install beautifulsoup4
 ```
 
