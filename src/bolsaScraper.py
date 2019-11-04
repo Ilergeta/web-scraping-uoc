@@ -57,7 +57,8 @@ class BolsaScraper():
            # This loop find link that contain the name of company and return the
            # page that contain information about this
            for link in links:
-               if nomEmpresa in link.text:
+               # Find link of all companies
+               if nomEmpresa.upper() in link.text:
                    linkEmp = link.attrs['href']
            # This if control that the while are not infinite in case that not
            # find any match with the name (Only read the all page of the table)
@@ -67,13 +68,13 @@ class BolsaScraper():
            page = page + 1
            
            
-           # Define dict to change part of url to goes directly to page that
-           # contain data 
-           urlchange = {
-                   "FichaValor": "InfHistorica"
-                   }
-           for word, info in urlchange.items():
-               linkEmp = linkEmp.replace(word, info)
+        # Define dict to change part of url to goes directly to page that
+        # contain data 
+        urlchange = {
+                "FichaValor": "InfHistorica"
+                }
+        for word, info in urlchange.items():
+            linkEmp = linkEmp.replace(word, info)
                 
         return linkEmp
         
@@ -173,6 +174,10 @@ class BolsaScraper():
             bolsa_writer.writerow(self.company)
             bolsa_writer.writerow(self.first_row)
             bolsa_writer.writerows(self.content)
+            
+            
+    #def findMultiplesCompanys(self, listCompanys):
+        
         
 
 def main():
@@ -181,10 +186,12 @@ def main():
     bolsa = BolsaScraper()
     
     # Find url with the name of the company
-    url = bolsa.trobarEmpresa("MAPFRE")
+    url = bolsa.trobarEmpresa("amper")
+    
+    print(url)
     
     # Find and save data from a company defined before
-    bolsa.dadesEmpresa(url)
+    #bolsa.dadesEmpresa(url)
     
 if __name__ == "__main__":
     main()
