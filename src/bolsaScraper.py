@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*f
 import requests
 import csv
-import mechanize
+from selenium import webdriver
 from bs4 import BeautifulSoup
 
 class BolsaScraper():
@@ -10,8 +10,7 @@ class BolsaScraper():
         # Definim l'url basica de la web
         self.path = 'http://www.bolsamadrid.es'
         
-    # TODO - cercar l'empresa desitjada
-#      - poder paginar les dades de les diferents dates
+
     def trobarEmpresa(self, nomEmpresa):
         """
         Aquesta funció retorna el path final de l'empresa que busquem
@@ -91,48 +90,81 @@ class BolsaScraper():
         finish_month = '8'
         finish_year = '2019'       
 
-        br = mechanize.Browser()
+        driver = webdriver.Firefox(executable_path = '/media/josepm/Disc Dades/esborrar/geckodriver/geckodriver')
 
-        # Loads webpage -- Serà variable vindrà donada per la funció anterior
-        
+        # Builds url needed        
         url = self.path + lastUrl
 
-        # Opens url and selects date form
-        br.open(url)
-        br.select_form(nr=1)
+        # Opens url
+        driver.get(url)
 
-        # Introduces data required to form and submit it
-        br['ctl00$Contenido$Desde$Dia'] = start_day
-        br['ctl00$Contenido$Desde$Mes'] = start_month
-        br['ctl00$Contenido$Desde$Año'] = start_year
-        br['ctl00$Contenido$Hasta$Dia'] = finish_day
-        br['ctl00$Contenido$Hasta$Mes'] = finish_month
-        br['ctl00$Contenido$Hasta$Año'] = finish_year
+        # Clears and sets starting day
+        input_start_day = driver.find_element_by_id('ctl00_Contenido_Desde_Dia')
+        input_start_day.clear()
+        input_start_day.send_keys(start_day)
 
-        # Checks parameters in form
-        # print(br.form)
+        # Clears and sets starting month
+        input_start_month = driver.find_element_by_id('ctl00_Contenido_Desde_Mes')
+        input_start_month.clear()
+        input_start_month.send_keys(start_month)
 
-        # Submits form
-        response = br.submit()
+        # Clears and sets starting year
+        input_start_day = driver.find_element_by_id('ctl00_Contenido_Desde_Año')
+        input_start_day.clear()
+        input_start_day.send_keys(start_year)
+
+        # Clears and sets finishing day
+        input_start_day = driver.find_element_by_id('ctl00_Contenido_Hasta_Dia')
+        input_start_day.clear()
+        input_start_day.send_keys(finish_day)
+
+        # Clears and sets finishing month
+        input_start_month = driver.find_element_by_id('ctl00_Contenido_Hasta_Mes')
+        input_start_month.clear()
+        input_start_month.send_keys(finish_month)
+
+        # Clears and sets finishing year
+        input_start_day = driver.find_element_by_id('ctl00_Contenido_Hasta_Año')
+        input_start_day.clear()
+        input_start_day.send_keys(finish_year)
+
+        # Submits data range
+        driver.find_element_by_id('ctl00_Contenido_Buscar').click()
         
-        soup = BeautifulSoup(response.read(), 'html.parser')
-        
-        # Reads data
-        taula = soup.find(id="ctl00_Contenido_tblDatos")
-        
-        # Ticker
-        ticker = [soup.find(class_= 'FrmBusq').find_all('td')[10].string.strip()]
-        
-        # Company name
-        self.company = [soup.find(class_= 'FrmBusq').find_all('td')[8].string.strip()]
-        
-        # Heading row
-        self.first_row = [title.string for title in taula.find_all('th')]
-        
+        # Ticker and company name
+        data_form = driver.find_element_by_class_name('FrmBusq').find_elements_by_tag_name('td')
+
+        self.company = [data_form[8].text]
+        ticker = [data_form[10].text]
+
+        # Reads table data
+        taula = driver.find_element_by_id('ctl00_Contenido_tblDatos')
+
+        # Heading rows
+        self.first_row = [title.text for title in taula.find_elements_by_tag_name('th')]
+
         # Other rows
-        self.content = [[element.string for element in row.find_all('td')] for row in taula.find_all('tr')[1:]]
+        # Reads first page
+        self.content = [[element.text for element in row.find_elements_by_tag_name('td')] 
+            for row in taula.find_elements_by_tag_name('tr')[1:]]
         
+        # Reads other pages
+        try:
+            while driver.find_element_by_id('ctl00_Contenido_SiguientesArr'):
+                driver.find_element_by_id('ctl00_Contenido_SiguientesArr').click()
+
+                taula = driver.find_element_by_id('ctl00_Contenido_tblDatos')
+
+                for row in taula.find_elements_by_tag_name('tr')[1:]:
+                    self.content.append([element.text for element in row.find_elements_by_tag_name('td')])
+    
+        except:
+            pass
+    
+        # Closes window explorer
+        driver.quit()
         
+        # Calls CSV writer method
         self.data2csv(ticker[0])
             
     def data2csv(self, filename):
@@ -149,7 +181,7 @@ def main():
     bolsa = BolsaScraper()
     
     # Find url with the name of the company
-    url = bolsa.trobarEmpresa("BANCO BRADESCO S.A.")
+    url = bolsa.trobarEmpresa("MAPFRE")
     
     # Find and save data from a company defined before
     bolsa.dadesEmpresa(url)
