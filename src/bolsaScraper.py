@@ -198,8 +198,8 @@ class BolsaScraper():
         with open("../data/"+filename+'.csv', "w+", newline='') as csvfile:
             bolsa_writer = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             bolsa_writer.writerow(self.company)
-            bolsa_writer.writerow("Image url: %s"%(imageurl))
-            bolsa_writer.writerow("Image folder: %s"%(self.company[0]+".gif"))
+            bolsa_writer.writerow(["Image url: %s"%(imageurl)])
+            bolsa_writer.writerow(["Image folder: %s"%(self.company[0]+".gif")])
             bolsa_writer.writerow(self.first_row)
             bolsa_writer.writerows(self.content)
             
