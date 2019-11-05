@@ -88,19 +88,19 @@ class BolsaScraper():
         """
         # Select drivers in function of OS
         if psutil.MACOS == True:
-            driverpath = self.dir_path + "/drivers/macos"
+            driverpath = self.dir_path + "/drivers/macos/geckodriver"
             
         if psutil.WINDOWS == True:
             if str(platform.architecture()[0]) == "64bit":
-                driverpath = self.dir_path + "/drivers/win64"
+                driverpath = self.dir_path + "/drivers/win64/geckodriver.exe"
             else:
-                driverpath = self.dir_path + "/drivers/win32"
+                driverpath = self.dir_path + "/drivers/win32/geckodriver.exe"
         
-        if psutil.WINDOWS == True:
+        if psutil.LINUX == True:
             if str(platform.architecture()[0]) == "64bit":
-                driverpath = self.dir_path + "/drivers/linux64"
+                driverpath = self.dir_path + "/drivers/linux64/geckodriver"
             else:
-                driverpath = self.dir_path + "/drivers/linux32"
+                driverpath = self.dir_path + "/drivers/linux32/geckodriver"
             
         
         # Set vars with fixed values to future improve from data user in command line
