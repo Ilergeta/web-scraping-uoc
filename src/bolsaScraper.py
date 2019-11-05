@@ -115,7 +115,7 @@ class BolsaScraper():
 
         # Builds url needed        
         url = self.path + lastUrl
-        print(url)
+
 
         # Opens url
         driver.get(url)
@@ -186,35 +186,46 @@ class BolsaScraper():
         # Closes window explorer
         driver.quit()
         
+        # Save image and opteined url
+        imageurl = self.findIimage(url, self.company[0])
+        
         # Calls CSV writer method
-        self.data2csv(ticker[0])
+        self.data2csv(ticker[0], imageurl)
+        
+        
             
-    def data2csv(self, filename):
+    def data2csv(self, filename, imageurl):
         with open("../data/"+filename+'.csv', "w+", newline='') as csvfile:
             bolsa_writer = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             bolsa_writer.writerow(self.company)
+            bolsa_writer.writerow("Image url: %s"%(imageurl))
+            bolsa_writer.writerow("Image folder: %s"%(self.company[0]+".gif"))
             bolsa_writer.writerow(self.first_row)
             bolsa_writer.writerows(self.content)
             
             
     def findIimage(self, url, filename):
-        url = "http://www.bolsamadrid.es/esp/aspx/Empresas/FichaValor.aspx?ISIN=ES0125220311"
         # Post request to a url using header and data defined before
         response = requests.post(url)
         # Create soup with the html response from page
         soup = BeautifulSoup(response.content, 'html.parser')
         imgs = soup.find_all('img')
         
+        # Find image url
         imgEmp = ''
         for img in imgs:
             if 'logosEmisoras' in img["src"]:
                 imgEmp = img.attrs['src']
         
+        # Get image from a company
         imgResponse = requests.get(self.path+imgEmp)
         
+        # Write image in a folder
         with open("../images/"+filename+'.gif', "wb") as giffile:
             giffile.write(imgResponse.content)
             giffile.close()
+            
+        return self.path+imgEmp
         
         
         
@@ -226,12 +237,11 @@ def main():
     bolsa = BolsaScraper()
     
     # Find url with the name of the company
-    #url = bolsa.trobarEmpresa("amper")
+    url = bolsa.trobarEmpresa("amper")
     
     # Find and save data from a company defined before
-    #bolsa.dadesEmpresa(url)
+    bolsa.dadesEmpresa(url)
     
-    bolsa.findIimage("asas","ACCIONA")
     
 if __name__ == "__main__":
     main()
