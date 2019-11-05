@@ -19,6 +19,8 @@ En cas d'executar aquest programa des de MAC OS amb l'última actualització (*C
 ```
 a la carpeta */drivers/macos/*
 
+Cal tenir instal·lat el Firefox pel correcte funcionament del codi, si no es té instal·lat, es pot descarregar [aquí](https://www.mozilla.org/es-ES/firefox/new/)
+
 ## Estructura
 
 El programa consta d'una llibreria **bolsaScraper.py** i un script d'execució **main.py** en el qual s'executen les diferents funcions desenvolupades a la llibreria.
