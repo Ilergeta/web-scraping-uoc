@@ -115,6 +115,7 @@ class BolsaScraper():
 
         # Builds url needed        
         url = self.path + lastUrl
+        print(url)
 
         # Opens url
         driver.get(url)
@@ -196,9 +197,26 @@ class BolsaScraper():
             bolsa_writer.writerows(self.content)
             
             
-    def findMultiplesCompanys(self, listCompanys):
-        dir_path = os.path.dirname(os.path.abspath(__file__))
-        print(dir_path)
+    def findIimage(self, url, filename):
+        url = "http://www.bolsamadrid.es/esp/aspx/Empresas/FichaValor.aspx?ISIN=ES0125220311"
+        # Post request to a url using header and data defined before
+        response = requests.post(url)
+        # Create soup with the html response from page
+        soup = BeautifulSoup(response.content, 'html.parser')
+        imgs = soup.find_all('img')
+        
+        imgEmp = ''
+        for img in imgs:
+            if 'logosEmisoras' in img["src"]:
+                imgEmp = img.attrs['src']
+        
+        imgResponse = requests.get(self.path+imgEmp)
+        
+        with open("../images/"+filename+'.gif', "wb") as giffile:
+            giffile.write(imgResponse.content)
+            giffile.close()
+        
+        
         
         
 
@@ -208,10 +226,12 @@ def main():
     bolsa = BolsaScraper()
     
     # Find url with the name of the company
-    url = bolsa.trobarEmpresa("amper")
+    #url = bolsa.trobarEmpresa("amper")
     
     # Find and save data from a company defined before
-    bolsa.dadesEmpresa(url)
+    #bolsa.dadesEmpresa(url)
+    
+    bolsa.findIimage("asas","ACCIONA")
     
 if __name__ == "__main__":
     main()
