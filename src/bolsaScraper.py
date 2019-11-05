@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*f
 import requests
 import csv
+import psutil
+import platform
+import os
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
@@ -9,6 +12,7 @@ class BolsaScraper():
     def __init__(self):
         # Definim l'url basica de la web
         self.path = 'http://www.bolsamadrid.es'
+        self.dir_path = os.path.dirname(os.path.abspath(__file__))
         
 
     def trobarEmpresa(self, nomEmpresa):
@@ -82,6 +86,22 @@ class BolsaScraper():
         """
         Retorna les dades de l'empresa seleccionada
         """
+        # Select drivers in function of OS
+        if psutil.MACOS == True:
+            driverpath = self.dir_path + "/drivers/macos"
+            
+        if psutil.WINDOWS == True:
+            if str(platform.architecture()[0]) == "64bit":
+                driverpath = self.dir_path + "/drivers/win64"
+            else:
+                driverpath = self.dir_path + "/drivers/win32"
+        
+        if psutil.WINDOWS == True:
+            if str(platform.architecture()[0]) == "64bit":
+                driverpath = self.dir_path + "/drivers/linux64"
+            else:
+                driverpath = self.dir_path + "/drivers/linux32"
+            
         
         # Set vars with fixed values to future improve from data user in command line
         start_day = '2'
@@ -91,7 +111,7 @@ class BolsaScraper():
         finish_month = '8'
         finish_year = '2019'       
 
-        driver = webdriver.Firefox(executable_path = '/media/josepm/Disc Dades/esborrar/geckodriver/geckodriver')
+        driver = webdriver.Firefox(executable_path = driverpath)
 
         # Builds url needed        
         url = self.path + lastUrl
@@ -176,7 +196,9 @@ class BolsaScraper():
             bolsa_writer.writerows(self.content)
             
             
-    #def findMultiplesCompanys(self, listCompanys):
+    def findMultiplesCompanys(self, listCompanys):
+        dir_path = os.path.dirname(os.path.abspath(__file__))
+        print(dir_path)
         
         
 
@@ -188,10 +210,8 @@ def main():
     # Find url with the name of the company
     url = bolsa.trobarEmpresa("amper")
     
-    print(url)
-    
     # Find and save data from a company defined before
-    #bolsa.dadesEmpresa(url)
+    bolsa.dadesEmpresa(url)
     
 if __name__ == "__main__":
     main()
