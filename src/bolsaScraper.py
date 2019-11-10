@@ -234,13 +234,13 @@ class BolsaScraper():
 def main():
     
     # Aquest codi és el que anira finalment al main
-    bolsa = BolsaScraper()
+    #bolsa = BolsaScraper()
     
     # Find url with the name of the company
-    url = bolsa.trobarEmpresa("sabadell")
+    #url = bolsa.trobarEmpresa("sabadell")
     
     # Find and save data from a company defined before
-    bolsa.dadesEmpresa(url)
+    #bolsa.dadesEmpresa(url)
     
     
 if __name__ == "__main__":
