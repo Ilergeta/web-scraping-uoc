@@ -187,7 +187,7 @@ class BolsaScraper():
         driver.quit()
         
         # Save image and opteined url
-        imageurl = self.findIimage(url, self.company[0])
+        imageurl = self.findIimage(url, ticker[0])
         
         # Calls CSV writer method
         self.data2csv(ticker[0], imageurl)
@@ -199,7 +199,7 @@ class BolsaScraper():
             bolsa_writer = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             bolsa_writer.writerow(self.company)
             bolsa_writer.writerow(["Image url: %s"%(imageurl)])
-            bolsa_writer.writerow(["Image folder: %s"%(self.company[0]+".gif")])
+            bolsa_writer.writerow(["Image folder: %s"%(filename+".gif")])
             bolsa_writer.writerow(self.first_row)
             bolsa_writer.writerows(self.content)
             
@@ -237,7 +237,7 @@ def main():
     bolsa = BolsaScraper()
     
     # Find url with the name of the company
-    url = bolsa.trobarEmpresa("amper")
+    url = bolsa.trobarEmpresa("sabadell")
     
     # Find and save data from a company defined before
     bolsa.dadesEmpresa(url)
