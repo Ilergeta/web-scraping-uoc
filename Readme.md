@@ -41,26 +41,26 @@ El programa consta d'una llibreria **bolsaScraper.py** i un script d'execució *
 
 ## Com executar el codi
 
-Per definir l'empresa o les empreses de les quals es vulgui obtenir les dades i el període en el qual es vol obtenir la informació s'han d'afegir els parametres **--companies** i **--start** a l'execució. A la variable companies s'ha d'escriure el nom de l'empresa amb format "string: name" si es vol cercar més d'una empresa a l'hora s'han d'escriure els diferents noms separats per un espai (veure exemples).
+Per definir l'empresa o les empreses de les quals es vulgui obtenir les dades i el període en el qual es vol obtenir la informació s'han d'afegir els parametres **--companies** i **--start** a l'execució. A la variable companies s'ha d'escriure el nom de l'empresa amb format 'string: name' si es vol cercar més d'una empresa a l'hora s'han d'escriure els diferents noms separats per un espai, però és important sempre escriure els noms de les empreses entre comentes simples, tal com així: 'nom_empresa' (veure exemples).
 
 També s'ha de definir la data inicial de la cerca amb format "dia/mes/any" la data final és opcional, és a dir, si no es defineix s'agafa per defecte el dia en que s'executa el programa, en cas de voler afegir-la s'ha d'afegir el parametre **--end** a l'execució.
 
 Un cop s'han definit els paràmetres de la cerca s'ha d'executar el fitxer **main.py**, per fer-ho s'ha d'executar la següent línia des del terminal a la ruta on es trobi el fitxer:
 
 ```
-python main.py --companies company1 [company2 ...] --start startdate [--end enddate]
+python main.py --companies 'company1' ['company2' ...] --start startdate [--end enddate]
 ```
 
 **Exemples:**
 
 La següent línia de comandes cerca les cotitzacions de l'empresa *BANCO DE SABADELL, S.A.* des del 24 de juny de 2019 fins al dia en que s'executa el programa:
 ```
-python main.py --companies san SABADELL --start 24/06/2019     
+python main.py --companies 'san' 'SABADELL' --start 24/06/2019     
 ```
 
 Per cercar les cotitzacions de les empreses *BANCO DE SABADELL, S.A.* i *BANCO DE SANTANDER, S.A.* entre el 24 de juny i el 9 de novembre de 2019 es pot executar la següent línia de comandes:
 ```
-python main.py --companies san SABADELL --start 24/06/2019 --end 9/10/2019
+python main.py --companies 'san' 'SABADELL' --start 24/06/2019 --end 9/10/2019
 ```
 
 ## Estructura del nom de cerca
