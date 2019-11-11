@@ -38,3 +38,7 @@ Un cop hem definit els paràmetres de la nostra cerca s'ha d'executar el fitxer 
 ```
 python main.py
 ```
+### Estrcutura del nom de cerca:
+El programa és capaç de buscar el nom de qualsevol empresa dintre de la borsa de Madrid sense importar si està escrit en majúscules, minúscules o una combinació de les dues, a més encarar que el nom no sigui complet també és capaç de cercar-ho, per exemple el nom del Sabadell a la taula és BANCO DE SABADELL, S.A. però si busques simplement sabadell, el programa és capaç de trobar les dades en un període de temps, a més si busques una empresa que pertany al IBEX35 el programa també és capaç de fer una cerca pel ticker de l'empresa per exemple, si busquem SAB (tant si està en majúscules o en minúscules) que és el ticker de BANCO DE SABADELL, S.A. el programa és capaç de buscar l'empresa i retornar les dades en el període de temps indicat.
+
+Podem trobar els tickers de les empreses a [Ticker IBEX35](https://es.wikipedia.org/wiki/IBEX_35)
