@@ -2,7 +2,7 @@
 
 ## Llibreries
 
-Per executar el nostre codi és necesari tenir instalades les llibreries:
+Per executar el nostre codi és necesari tenir instal:lades les llibreries:
 
 ```
 pip install pandas
@@ -29,25 +29,29 @@ Per a més informació consultar la [Wiki](https://github.com/alaverma/web-scrap
 
 ## Com executar el codi.
 
-Per definir l'empresa o les empreses de les quals es vulgui obtenir les dades i el període del qual es vol obtenir la informació s'han d'afegir els parametres **--companies** i **--start** a l'execucuó. A la variable companies s'ha d'escriure el nom de l'empresa amb format string: name si es vol cercar més d'una empresa a l'hora s'han d'escriure els diferents noms separats per un espai (mirar exemple d'abaix).
+Per definir l'empresa o les empreses de les quals es vulgui obtenir les dades i el període en el qual es vol obtenir la informació s'han d'afegir els parametres **--companies** i **--start** a l'execució. A la variable companies s'ha d'escriure el nom de l'empresa amb format "string: name" si es vol cercar més d'una empresa a l'hora s'han d'escriure els diferents noms separats per un espai (veure exemples).
 
-També s'ha de definir la data inicial de la cerca amb format "dia/mes/any" la data final és opcional, és a dir, si no es de defineix s'agafa per defecte la data d'avui, en cas de voler afegir-la s'ha d'afegir el parametre **--end** a l'execució
+També s'ha de definir la data inicial de la cerca amb format "dia/mes/any" la data final és opcional, és a dir, si no es defineix s'agafa per defecte el dia en que s'executa el programa, en cas de voler afegir-la s'ha d'afegir el parametre **--end** a l'execució.
 
-Un cop hem definit els paràmetres de la nostra cerca s'ha d'executar el fitxer **main.py**, per fer-ho s'ha d'executar la següent línia des del terminal a la ruta on es trobi el fitxer:
-
-```
-python main.py --companies $companies --start $data --end $data
-```
-
-Per exemple:
+Un cop s'han definit els paràmetres de la cerca s'ha d'executar el fitxer **main.py**, per fer-ho s'ha d'executar la següent línia des del terminal a la ruta on es trobi el fitxer:
 
 ```
-python main.py --companies san SABADELL --start 24/06/2019
+python main.py --companies company1 [company2 ...] --start startdate [--end enddate]
+```
 
+Exemples:
+
+La següent línia de comandes cerca les cotitzacions de l'empresa *BANCO DE SABADELL, S.A.* des del 24 de juny de 2019 fins al dia en que s'executa el programa:
+```
+python main.py --companies san SABADELL --start 24/06/2019     
+```
+
+Per cercar les cotitzacions de les empreses *BANCO DE SABADELL, S.A.* i *BANCO DE SANTANDER, S.A.* entre el 24 de juny i el 9 de novembre de 2019 es pot executar la següent línia de comandes:
+```
 python main.py --companies san SABADELL --start 24/06/2019 --end 9/10/2019
 ```
 
-### Estrcutura del nom de cerca:
-El programa és capaç de buscar el nom de qualsevol empresa dintre de la borsa de Madrid sense importar si està escrit en majúscules, minúscules o una combinació de les dues, a més encarar que el nom no sigui complet també és capaç de cercar-ho, per exemple el nom del Sabadell a la taula és BANCO DE SABADELL, S.A. però si busques simplement sabadell, el programa és capaç de trobar les dades en un període de temps, a més si busques una empresa que pertany al IBEX35 el programa també és capaç de fer una cerca pel ticker de l'empresa per exemple, si busquem SAB (tant si està en majúscules o en minúscules) que és el ticker de BANCO DE SABADELL, S.A. el programa és capaç de buscar l'empresa i retornar les dades en el període de temps indicat.
+### Estructura del nom de cerca:
+El programa és capaç de trobar les dades de qualsevol empresa que cotitzi a la borsa de Madrid sense importar si el seu nom està escrit en majúscules, minúscules o una combinació de les dues, a més encara que el nom no sigui complet també és capaç de cercar-ho, per exemple, l'empresa BANCO DE SABADELL, S.A. es pot cercar simplement com ```sabadell```. Igualment, el programa és capaç de trobar les dades en un període de temps. Finalment, si es cerca una empresa que pertany a l'IBEX35, la cerca també es pot fer pel ticker de l'empresa, així, si es volen les dades de l'empresa BANCO DE SABADELL, S.A. que està inclosa a l'índex IBEX35, es pot realitzar la cerca introduint el seu ticker que és ```SAB``` (tant si està en majúscules o en minúscules) i, d'aquesta manera, el programa és capaç de retornar les dades en el període de temps indicat.
 
-Podem trobar els tickers de les empreses a [Ticker IBEX35](https://es.wikipedia.org/wiki/IBEX_35)
+Es poden consultar els tickers de les empreses a [tickers IBEX35](https://es.wikipedia.org/wiki/IBEX_35)
