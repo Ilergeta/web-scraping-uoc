@@ -2,7 +2,7 @@
 
 ## Llibreries
 
-Per executar el nostre codi és necesari tenir instal·lades les llibreries:
+Per executar aquest codi és necessari tenir instal·lades les llibreries:
 
 ```
 pip install pandas
