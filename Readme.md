@@ -25,7 +25,7 @@ Cal tenir instal·lat el Firefox pel correcte funcionament del codi, si no es t�
 
 El programa consta d'una llibreria **bolsaScraper.py** i un script d'execució **main.py** en el qual s'executen les diferents funcions desenvolupades a la llibreria.
 
-Per a més informació consultar la [Wiki](https://github.com/alaverma/web-scraping-uoc/wiki/Pr%C3%A0ctica-1:-Web-Scraping)
+Per a més informació sobre el codi del programa, així com de l'equip que l'ha desenvolupat, es pot consultar la [Wiki](https://github.com/alaverma/web-scraping-uoc/wiki/Pr%C3%A0ctica-1:-Web-Scraping).
 
 ## Com executar el codi.
 
@@ -55,3 +55,5 @@ python main.py --companies san SABADELL --start 24/06/2019 --end 9/10/2019
 El programa és capaç de trobar les dades de qualsevol empresa que cotitzi a la borsa de Madrid sense importar si el seu nom està escrit en majúscules, minúscules o una combinació de les dues, a més encara que el nom no sigui complet també és capaç de cercar-ho, per exemple, l'empresa BANCO DE SABADELL, S.A. es pot cercar simplement com ```sabadell```. Igualment, el programa és capaç de trobar les dades en un període de temps. Finalment, si es cerca una empresa que pertany a l'IBEX35, la cerca també es pot fer pel ticker de l'empresa, així, si es volen les dades de l'empresa BANCO DE SABADELL, S.A. que està inclosa a l'índex IBEX35, es pot realitzar la cerca introduint el seu ticker que és ```SAB``` (tant si està en majúscules o en minúscules) i, d'aquesta manera, el programa és capaç de retornar les dades en el període de temps indicat.
 
 Es poden consultar els tickers de les empreses a [tickers IBEX35](https://es.wikipedia.org/wiki/IBEX_35)
+
+Per a més informació sobre l'estructura dels fitxers de sortida i aspectes legals, es pot consultar la [memòria](https://github.com/alaverma/web-scraping-uoc/blob/master/docs/Memoria_PRA1.pdf).
