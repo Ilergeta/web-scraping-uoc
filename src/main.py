@@ -21,19 +21,18 @@ for key, value in parser.parse_args()._get_kwargs():
         start_date = value
     if key == "end":
         end_date = value
-print(companies, start_date, type(start_date), end_date)
 
-if end_date == None:
-    for companie in companies:
-        # Obtained url
-        url = scraper.trobarEmpresa(companie)
-        # Scraping and saving informaiton about the companies
-        scraper.dadesEmpresa(url, start_date)
-else:
-    for companie in companies:
-        # Obtained url
-        url = scraper.trobarEmpresa(companie)
-        # Scraping and saving informaiton about the companies
-        scraper.dadesEmpresa(url, start_date, end_date)
-    
+for company in companies:
 
+        # Obtained url
+        url = scraper.trobarEmpresa(company)
+
+        if url:
+                # Scraping and saving information about the companies
+                if end_date == None:        
+                        scraper.dadesEmpresa(url, start_date)
+                else:
+                        scraper.dadesEmpresa(url, start_date, end_date)
+
+        else:
+                pass

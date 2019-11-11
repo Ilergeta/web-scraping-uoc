@@ -77,11 +77,10 @@ class BolsaScraper():
            # This if control that the while are not infinite in case that not
            # find any match with the name (Only read the all page of the table)
            if page > 7:
-               print("No se encuentra la empresa")
-               break
+               print("No es troben les dades de l'empresa '{}'!!!, comprova que l'empresa cotitza a la borsa de Madrid".format(nomEmpresa))
+               return None
            page = page + 1
-           
-           
+              
         # Define dict to change part of url to goes directly to page that
         # contain data 
         urlchange = {
@@ -116,7 +115,7 @@ class BolsaScraper():
         try:
             start_date = datetime.datetime.strptime(start, "%d/%m/%Y").date()
         except:
-            print("Data don't have correct format please insert  start date with day/month/year format.")
+            print("Date doesn't have correct format, please insert start date with day/month/year format.")
             sys.exit()
     
         if not end:
@@ -125,7 +124,7 @@ class BolsaScraper():
             try:
                 end_date = datetime.datetime.strptime(end, "%d/%m/%Y").date()
             except:
-                print("Data don't have correct format please insert end date with day/month/year format.")
+                print("Date doesn't have correct format, please insert end date with day/month/year format.")
                 sys.exit()
         
         # Set vars with fixed values to future improve from data user in command line
@@ -217,7 +216,9 @@ class BolsaScraper():
         # Calls CSV writer method
         self.data2csv(ticker[0], imageurl)
         
-        
+        # Informs user data collected
+        print("S'ha obtingut amb èxit la cotització bursària de l'empresa {} entre les dates {} i {}"
+                .format(self.company[0], self.content[0][0], self.content[-1][0]))        
             
     def data2csv(self, filename, imageurl):
         with open("../data/"+filename+'.csv', "w+", newline='') as csvfile:
