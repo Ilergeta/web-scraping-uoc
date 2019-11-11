@@ -248,14 +248,6 @@ class BolsaScraper():
 
 def main():
     
-    start = "24-6-2018"
-    try:
-        date = datetime.datetime.strptime(start, "%d/%m/%Y").date()
-    except:
-        print("Data don't have correct format please insert data with day/month/year format.")
-        sys.exit()
-    
-    print(str(date.day), date.month, date.year)
     
     # Aquest codi és el que anira finalment al main
     #bolsa = BolsaScraper()
