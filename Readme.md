@@ -33,8 +33,8 @@ Per definir l'empresa o les empreses de les quals es vulgui obtenir les dades i 
 
 També s'ha de definir la data inicial de la cerca amb format "dia/mes/any" la data final és opcional, és a dir, si no s'especifica dintre de la funció *scraper.dadesEmpresa(url, start_date)* com és mostra en aquest exemple, s'agafa per defecte la data del dia de l'execució.
 
-Un cop hem definit els parametres de la nostre busqueda s'ha d'executar el fitxer **main.py**, per fer-ho s'ha d'executar la següent linia des del terminal a la ruta on es trobi el fitxer:
+Un cop hem definit els paràmetres de la nostra cerca s'ha d'executar el fitxer **main.py**, per fer-ho s'ha d'executar la següent línia des del terminal a la ruta on es trobi el fitxer:
 
 ```
 python main.py
-
+```
