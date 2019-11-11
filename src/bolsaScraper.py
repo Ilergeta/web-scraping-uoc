@@ -4,6 +4,8 @@ import csv
 import psutil
 import platform
 import os
+import datetime
+import sys
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
@@ -82,7 +84,7 @@ class BolsaScraper():
                 
         return linkEmp
         
-    def dadesEmpresa(self, lastUrl):
+    def dadesEmpresa(self, lastUrl, start, end=''):
         """
         Retorna les dades de l'empresa seleccionada
         """
@@ -101,15 +103,28 @@ class BolsaScraper():
                 driverpath = self.dir_path + "/drivers/linux64/geckodriver"
             else:
                 driverpath = self.dir_path + "/drivers/linux32/geckodriver"
-            
+        try:
+            start_date = datetime.datetime.strptime(start, "%d/%m/%Y").date()
+        except:
+            print("Data don't have correct format please insert  start date with day/month/year format.")
+            sys.exit()
+    
+        if not end:
+            end_date = datetime.date.today()
+        else:
+            try:
+                end_date = datetime.datetime.strptime(end, "%d/%m/%Y").date()
+            except:
+                print("Data don't have correct format please insert end date with day/month/year format.")
+                sys.exit()
         
         # Set vars with fixed values to future improve from data user in command line
-        start_day = '2'
-        start_month = '4'
-        start_year = '2019'
-        finish_day = '2'
-        finish_month = '8'
-        finish_year = '2019'       
+        start_day = str(start_date.day)
+        start_month = str(start_date.month)
+        start_year = str(start_date.year)
+        finish_day = str(end_date.day)
+        finish_month = str(end_date.month)
+        finish_year = str(end_date.year)       
 
         driver = webdriver.Firefox(executable_path = driverpath)
 
@@ -232,6 +247,15 @@ class BolsaScraper():
         
 
 def main():
+    
+    start = "24-6-2018"
+    try:
+        date = datetime.datetime.strptime(start, "%d/%m/%Y").date()
+    except:
+        print("Data don't have correct format please insert data with day/month/year format.")
+        sys.exit()
+    
+    print(str(date.day), date.month, date.year)
     
     # Aquest codi és el que anira finalment al main
     #bolsa = BolsaScraper()
