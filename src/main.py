@@ -5,7 +5,7 @@ scraper = BolsaScraper()
 
 
 # Write here companie or companies that you need do web scraping
-companies = ["aena", "SABADELL"]
+companies = ["SAN", "SABADELL"]
 
 # Start date is manadatory argument
 start_date = "24/06/2019"

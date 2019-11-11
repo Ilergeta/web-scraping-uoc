@@ -6,6 +6,7 @@ import platform
 import os
 import datetime
 import sys
+import pickle
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
@@ -41,6 +42,13 @@ class BolsaScraper():
         page = 0
         
         linkEmp = ''
+        # Read dict with tickers of ibex35 companies
+        with open(self.dir_path+'/cache/ticker.pkl', 'rb') as handle:
+            ticker = pickle.load(handle)
+        
+        # Check if the nomEmpresa is a ticker 
+        if nomEmpresa in ticker.keys():
+            nomEmpresa = ticker[nomEmpresa]
         
         # This loop run the all pages in a table until find the page that 
         # contain the name of entity 
@@ -83,6 +91,8 @@ class BolsaScraper():
             linkEmp = linkEmp.replace(word, info)
                 
         return linkEmp
+    
+    
         
     def dadesEmpresa(self, lastUrl, start, end=''):
         """
@@ -248,6 +258,7 @@ class BolsaScraper():
 
 def main():
     
+    bolsa = BolsaScraper()
     
     # Aquest codi és el que anira finalment al main
     #bolsa = BolsaScraper()
