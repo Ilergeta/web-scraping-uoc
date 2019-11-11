@@ -1,5 +1,19 @@
 # Bolsa scraper
 
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Llicència de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Aquesta obra està subjecta a una llicència de <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Reconeixement 4.0 Internacional de Creative Commons</a>
+
+## Índex
+
+[Llibreries](https://github.com/alaverma/web-scraping-uoc/blob/master/Readme.md#llibreries)
+
+[Estructura](https://github.com/alaverma/web-scraping-uoc/blob/master/Readme.md#Estructura)
+
+[Com executar el codi](https://github.com/alaverma/web-scraping-uoc/blob/master/Readme.md#com-executar-el-codi)
+
+[Estructura del nom de cerca](https://github.com/alaverma/web-scraping-uoc/blob/master/Readme.md#estructura-del-nom-de-cerca)
+
+Per a més informació sobre la motivació d'aquest programa, l'estructura dels fitxers de sortida i aspectes legals, es recomana consultar la [memòria](https://github.com/alaverma/web-scraping-uoc/blob/master/docs/Memoria_PRA1.pdf). En la [Wiki](https://github.com/alaverma/web-scraping-uoc/wiki/Pr%C3%A0ctica-1:-Web-Scraping) es pot trobar una explicació de l'estructura del codi del programa, així com de l'equip que l'ha desenvolupat.
+
 ## Llibreries
 
 Per executar aquest codi és necessari tenir instal·lades les llibreries:
@@ -25,9 +39,7 @@ Cal tenir instal·lat el Firefox pel correcte funcionament del codi, si no es t�
 
 El programa consta d'una llibreria **bolsaScraper.py** i un script d'execució **main.py** en el qual s'executen les diferents funcions desenvolupades a la llibreria.
 
-Per a més informació sobre el codi del programa, així com de l'equip que l'ha desenvolupat, es pot consultar la [Wiki](https://github.com/alaverma/web-scraping-uoc/wiki/Pr%C3%A0ctica-1:-Web-Scraping).
-
-## Com executar el codi.
+## Com executar el codi
 
 Per definir l'empresa o les empreses de les quals es vulgui obtenir les dades i el període en el qual es vol obtenir la informació s'han d'afegir els parametres **--companies** i **--start** a l'execució. A la variable companies s'ha d'escriure el nom de l'empresa amb format "string: name" si es vol cercar més d'una empresa a l'hora s'han d'escriure els diferents noms separats per un espai (veure exemples).
 
@@ -39,7 +51,7 @@ Un cop s'han definit els paràmetres de la cerca s'ha d'executar el fitxer **mai
 python main.py --companies company1 [company2 ...] --start startdate [--end enddate]
 ```
 
-Exemples:
+**Exemples:**
 
 La següent línia de comandes cerca les cotitzacions de l'empresa *BANCO DE SABADELL, S.A.* des del 24 de juny de 2019 fins al dia en que s'executa el programa:
 ```
@@ -51,9 +63,9 @@ Per cercar les cotitzacions de les empreses *BANCO DE SABADELL, S.A.* i *BANCO D
 python main.py --companies san SABADELL --start 24/06/2019 --end 9/10/2019
 ```
 
-### Estructura del nom de cerca:
+## Estructura del nom de cerca
 El programa és capaç de trobar les dades de qualsevol empresa que cotitzi a la borsa de Madrid sense importar si el seu nom està escrit en majúscules, minúscules o una combinació de les dues, a més encara que el nom no sigui complet també és capaç de cercar-ho, per exemple, l'empresa BANCO DE SABADELL, S.A. es pot cercar simplement com ```sabadell```. Igualment, el programa és capaç de trobar les dades en un període de temps. Finalment, si es cerca una empresa que pertany a l'IBEX35, la cerca també es pot fer pel ticker de l'empresa, així, si es volen les dades de l'empresa BANCO DE SABADELL, S.A. que està inclosa a l'índex IBEX35, es pot realitzar la cerca introduint el seu ticker que és ```SAB``` (tant si està en majúscules o en minúscules) i, d'aquesta manera, el programa és capaç de retornar les dades en el període de temps indicat.
 
 Es poden consultar els tickers de les empreses a [tickers IBEX35](https://es.wikipedia.org/wiki/IBEX_35)
 
-Per a més informació sobre l'estructura dels fitxers de sortida i aspectes legals, es pot consultar la [memòria](https://github.com/alaverma/web-scraping-uoc/blob/master/docs/Memoria_PRA1.pdf).
+
