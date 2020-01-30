@@ -4,15 +4,15 @@
 
 ## Índex
 
-[Llibreries](https://github.com/alaverma/web-scraping-uoc/blob/master/Readme.md#llibreries)
+[Llibreries](https://github.com/Ilergeta/web-scraping-uoc/blob/master/Readme.md#llibreries)
 
-[Estructura](https://github.com/alaverma/web-scraping-uoc/blob/master/Readme.md#Estructura)
+[Estructura](https://github.com/Ilergeta/web-scraping-uoc/blob/master/Readme.md#Estructura)
 
-[Com executar el codi](https://github.com/alaverma/web-scraping-uoc/blob/master/Readme.md#com-executar-el-codi)
+[Com executar el codi](https://github.com/Ilergeta/web-scraping-uoc/blob/master/Readme.md#com-executar-el-codi)
 
-[Estructura del nom de cerca](https://github.com/alaverma/web-scraping-uoc/blob/master/Readme.md#estructura-del-nom-de-cerca)
+[Estructura del nom de cerca](https://github.com/Ilergeta/web-scraping-uoc/blob/master/Readme.md#estructura-del-nom-de-cerca)
 
-Per a més informació sobre la motivació d'aquest programa, l'estructura dels fitxers de sortida i aspectes legals, es recomana consultar la [memòria](https://github.com/alaverma/web-scraping-uoc/blob/master/docs/Memoria_PRA1.pdf). En la [Wiki](https://github.com/alaverma/web-scraping-uoc/wiki/Pr%C3%A0ctica-1:-Web-Scraping) es pot trobar una explicació de l'estructura del codi del programa, així com de l'equip que l'ha desenvolupat.
+Per a més informació sobre la motivació d'aquest programa, l'estructura dels fitxers de sortida i aspectes legals, es recomana consultar la [memòria](https://github.com/Ilergeta/web-scraping-uoc/blob/master/docs/Memoria_PRA1.pdf). En la [Wiki](https://github.com/Ilergeta/web-scraping-uoc/wiki/Pr%C3%A0ctica-1:-Web-Scraping) es pot trobar una explicació de l'estructura del codi del programa, així com de l'equip que l'ha desenvolupat.
 
 ## Llibreries
 
